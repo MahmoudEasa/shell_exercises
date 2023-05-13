@@ -31,6 +31,7 @@ int main(int ac, char **av)
 			printf(" NOT FOUND\n");
 		}
 		i++;
+		printf("\nfile Sizd: %ld bytes\n", st.st_size);
 	}
 	return (0);
 }
