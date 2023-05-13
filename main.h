@@ -15,5 +15,6 @@
 char **words(char *str, char *tok, int *arr_len);
 char *_strtok(char *str, char *tok);
 char *allocate(char *token, char tok, int *tok_len);
+char *_getenv(const char *name);
 
 #endif /* #ifdef MAIN_H */

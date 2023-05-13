@@ -2,10 +2,22 @@
 
 int main(int argc, char **argv)
 {
-        char **arr;
+        char **arr, *getenv;
         int len = 0, i;
+	(void)arr;
+	(void)getenv;
+	(void)len;
+	(void)i;
+	(void)argc;
+	(void)argv;
 
-        if (argc != 3)
+	if (argc != 2)
+	{
+		printf("Usage: %s <str>\n", argv[0]);
+		return (0);
+	}
+
+/*        if (argc != 3)
         {
                 printf("Usage: <str> <token>\n");
                 return (0);
@@ -18,7 +30,11 @@ int main(int argc, char **argv)
                 printf("%s\n", arr[i]);
                 free(arr[i]);
         }
-        free(arr);
+        free(arr);*/
+
+	getenv = _getenv(argv[1]);
+
+	printf("Env Value: %s\n", getenv);
         return (0);
 }
 
