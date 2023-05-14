@@ -11,11 +11,11 @@ int main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
-	if (argc != 2)
+/*	if (argc != 2)
 	{
 		printf("Usage: %s <str>\n", argv[0]);
 		return (0);
-	}
+	}*/
 
 /*        if (argc != 3)
         {
@@ -32,9 +32,11 @@ int main(int argc, char **argv)
         }
         free(arr);*/
 
-	getenv = _getenv(argv[1]);
+/*	getenv = _getenv(argv[1]);*/
+	len = prompt();
+/*	_setenv("MAHMOUD", "setenv/env/env", 1);*/
 
-	printf("Env Value: %s\n", getenv);
+	printf("len: %d\n", len);
         return (0);
 }
 

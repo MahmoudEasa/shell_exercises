@@ -18,11 +18,13 @@ typedef struct dir
 	struct dir *next;
 } Dir;
 
+int prompt(void);
 char **words(char *str, char *tok, int *arr_len);
 char *_strtok(char *str, char *tok);
 char *allocate(char *token, char tok, int *tok_len);
 char *_getenv(const char *name);
 void push(Dir **head, char *str);
 void _free(Dir **head);
+int _setenv(const char *name, const char *value, int overwrite);
 
 #endif /* #ifdef MAIN_H */

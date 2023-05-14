@@ -3,12 +3,19 @@
 char **words(char *str, char *tok, int *arr_len)
 {
 	char *token, **arr = NULL;
-	int len, i = 0;
+	int len = 1, i = 0;
+
+
+	for (i = 0; i < strlen(str); i++)
+		if (str[i] == *tok)
+			len++;
+
+	arr = malloc(sizeof(char *) * (len));
+	if (!arr)
+		return (NULL);
 
 	token = _strtok(str, tok);
-
-	arr = malloc(sizeof(char *) * strlen(str));
-
+	i = 0;
 	while (token)
 	{
 		*arr_len += 1;
@@ -83,6 +90,9 @@ char *allocate(char *token, char tok, int *tok_len)
 
 	ptr = malloc(sizeof(char) * (len + 1));
 	if (!ptr)
+		return (NULL);
+
+	if (!tok_help || !(*tok_help))
 		return (NULL);
 
 	for (i = 0; i < len; i++)

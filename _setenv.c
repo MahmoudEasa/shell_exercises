@@ -19,7 +19,13 @@ int _setenv(const char *name, const char *value, int overwrite)
 	if (overwrite)
 	{
 		val = _getenv(name);
-		val = strdup(value);
+		printf("\nPathe before if: %s\n", val);
+		if (!val)
+		{
+			val = strdup(name);
+			strcat(val, "=");
+			strcat(val, value);
+		}
 		printf("\nPathe: %s\n", val);
 	}
 

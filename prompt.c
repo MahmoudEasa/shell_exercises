@@ -1,25 +1,28 @@
 #include "main.h"
 
-int main()
+int prompt(void)
 {
-	char *buffer;
+	static char buffer[1024];
 	int r;
 
-	while (1)
+	printf("$ ");
+/*	r = read(STDIN_FILENO, buffer, 1024);*/
+
+	if (fgets(buffer, 1024, stdin) == NULL)
 	{
-		buffer = malloc(sizeof(char) * 1024);
-		if (!buffer)
-			exit(-1);
-
-		r = read(STDIN_FILENO, buffer, 1024);
-
-		if (r == 0)
-			break;
-
-		printf("len: %d buffer: %s\n", r, buffer);
-		free(buffer);
+		printf("\n");
+		exit (EXIT_FAILURE);
 	}
 
-	return (0);
+	r = strlen(buffer);
+
+	if (feof(stdin))
+	{
+		printf("\n");
+		exit(EXIT_SUCCESS);
+	}
+
+	printf("%s\n", buffer);
+	return (r);
 }
 
