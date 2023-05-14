@@ -1,9 +1,9 @@
 #include "main.h"
 
-int prompt(void)
+char* _readline(void)
 {
 	static char buffer[1024];
-	int r;
+	int len;
 
 	printf("$ ");
 /*	r = read(STDIN_FILENO, buffer, 1024);*/
@@ -11,18 +11,20 @@ int prompt(void)
 	if (fgets(buffer, 1024, stdin) == NULL)
 	{
 		printf("\n");
-		exit (EXIT_FAILURE);
+		return (NULL);
 	}
 
-	r = strlen(buffer);
+	len = strlen(buffer) -1;
+
+	if (buffer[len] == '\n')
+		buffer[len] = '\0';
 
 	if (feof(stdin))
 	{
 		printf("\n");
-		exit(EXIT_SUCCESS);
+		return (NULL);
 	}
 
-	printf("%s\n", buffer);
-	return (r);
+	return (buffer);
 }
 

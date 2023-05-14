@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-        char **arr, *getenv;
+        char **arr, *getenv = NULL;
         int len = 0, i;
 	(void)arr;
 	(void)getenv;
@@ -33,10 +33,11 @@ int main(int argc, char **argv)
         free(arr);*/
 
 /*	getenv = _getenv(argv[1]);*/
-	len = prompt();
+/*	len = prompt();*/
 /*	_setenv("MAHMOUD", "setenv/env/env", 1);*/
-
-	printf("len: %d\n", len);
+	init_shell();
+	getenv = takeInput();
+	printf("Input: %s\n", getenv);
         return (0);
 }
 
