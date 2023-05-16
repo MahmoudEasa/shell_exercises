@@ -18,6 +18,7 @@ char **split_str(char *str);
 void _free(char **cmd);
 void print_env(char **env);
 char *allocate(char c, int size);
+void run_fork(char *command, char **av, char **env);
 
 #endif /* #ifdef MAIN_H */
 
