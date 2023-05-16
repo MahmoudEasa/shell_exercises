@@ -13,6 +13,7 @@ void prompt(char **buf)
 		if (feof(stdin))
 		{
 			printf("\n");
+			free(*buf);
                         exit(EXIT_SUCCESS);
 		}
 

@@ -23,7 +23,10 @@ int main(int ac, char **av, char **env)
 		prompt(&command);
 		len = strlen(command);
 		if (*command == '\n')
+		{
+			free(command);
 			continue;
+		}
 		command[len - 1] = '\0';
 		if (stat(command, &st) == 0)
 		{
@@ -43,7 +46,10 @@ int main(int ac, char **av, char **env)
 			}
 		}
 		else
+		{
+			free(command);
 			perror(av[0]);
+		}
 	}
 	return (0);
 }
