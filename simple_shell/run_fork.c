@@ -7,33 +7,35 @@
  * @env: array of environment variables
  */
 
-void run_fork(char *command, char **av, char **env)
+void run_fork(char **command, char **av, char **env)
 {
 	struct stat st;
 	pid_t child;
-	char *args[2];
 	int status;
+	char arg0[30] = "/bin/";
 
-	if (stat(command, &st) == 0)
+	exit_p(command);
+	if (*command[0] != '/' && (*command[0] != '.' && command[0][1] != '/'))
+		strcat(arg0, command[0]);
+	else
+		strcpy(arg0, command[0]);
+
+	if (stat(arg0, &st) == 0)
 	{
 		child = fork();
 		if (child == -1)
 			perror("Error ");
 		if (child == 0)
-		{
-			args[0] = command;
-			args[1] = NULL;
-			exe(args, env);
-		}
+			exe(command, env);
 		else
 		{
 			wait(&status);
-			free(command);
+			_free(command);
 		}
 	}
 	else
 	{
-		free(command);
+		_free(command);
 		perror(av[0]);
 	}
 }

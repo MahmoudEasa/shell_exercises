@@ -1,5 +1,7 @@
 #include "main.h"
 
+#define clear() printf("\033[H\033[J")
+
 /**
  * main - simpli shell
  * @ac: number of arguments
@@ -11,14 +13,28 @@
 
 int main(int ac, char **av, char **env)
 {
-	char *command = NULL;
+	char *command = NULL, **args;
 	int len;
 
 	(void)ac;
 	while (1)
 	{
-		command = allocate('c', 1024);
+		command = malloc(sizeof(char) * 1024);
+		if (!command)
+			exit(EXIT_FAILURE);
 		prompt(&command);
+		if (strcmp(command, "clear") == 0)
+		{
+			free(command);
+			clear();
+			continue;
+		}
+		if (strcmp(command, "env") == 0)
+		{
+			free(command);
+			print_env(env);
+			continue;
+		}
 		len = strlen(command);
 		if (*command == '\n')
 		{
@@ -26,7 +42,9 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		command[len - 1] = '\0';
-		run_fork(command, av, env);
+		args = split_str(command);
+		free(command);
+		run_fork(args, av, env);
 	}
 	return (0);
 }

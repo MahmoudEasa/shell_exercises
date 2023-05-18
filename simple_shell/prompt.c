@@ -14,7 +14,7 @@ void prompt(char **buf)
 		{
 			printf("\n");
 			free(*buf);
-                        exit(EXIT_SUCCESS);
+			exit(EXIT_SUCCESS);
 		}
 
 		perror("Error ");
