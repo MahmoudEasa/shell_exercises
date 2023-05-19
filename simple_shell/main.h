@@ -20,6 +20,9 @@ void print_env(char **env);
 char *allocate(char c, int size);
 void run_fork(char **command, char **av, char **env);
 void exit_p(char **command);
+void print_pid();
+void print_ppid();
+void check_command(char **command, char **env);
 
 #endif /* #ifdef MAIN_H */
 

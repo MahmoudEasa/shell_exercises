@@ -16,8 +16,8 @@ void exe(char **args, char **env)
 		if (execve(arg0, args, env) == -1)
 			perror(args[0]);
 	}
-
-	if (execve(args[0], args, env) == -1)
-		perror(args[0]);
+	else
+		if (execve(args[0], args, env) == -1)
+			perror(args[0]);
 }
 

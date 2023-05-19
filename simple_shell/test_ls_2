@@ -1,0 +1,7 @@
+/bni/ls
+/bin/ls
+ls
+ls -l -a -h
+ls # -l -a -h
+# ls -l -a -h
+

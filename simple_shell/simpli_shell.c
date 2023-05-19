@@ -15,8 +15,8 @@ int main(int ac, char **av, char **env)
 {
 	char *command = NULL, **args;
 	int len;
-
 	(void)ac;
+
 	while (1)
 	{
 		command = malloc(sizeof(char) * 1024);

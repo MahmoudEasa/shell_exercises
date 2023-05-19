@@ -20,6 +20,7 @@ void run_fork(char **command, char **av, char **env)
 	else
 		strcpy(arg0, command[0]);
 
+
 	if (stat(arg0, &st) == 0)
 	{
 		child = fork();
