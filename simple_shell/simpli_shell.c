@@ -44,6 +44,8 @@ int main(int ac, char **av, char **env)
 		command[len - 1] = '\0';
 		args = split_str(command);
 		free(command);
+		if (!args)
+			continue;
 		run_fork(args, av, env);
 	}
 	return (0);

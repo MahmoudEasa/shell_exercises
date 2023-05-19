@@ -13,27 +13,28 @@ char **split_str(char *str)
 	int len, i;
 
 	arg = strtok(strp, " ");
-	if (arg != NULL)
+	if (arg != NULL && *arg != '#')
 		len = 1;
-	while ((arg = strtok(NULL, " ")) != NULL)
+
+	while (((arg = strtok(NULL, " ")) != NULL && *arg != '#'))
 		len++;
 	free(strp);
 
 	arg = strtok(str, " ");
-	if (arg)
+	if (arg && *arg != '#')
 	{
 		command = malloc(sizeof(char *) * (len + 1));
 		if (!command)
-			exit(-1);
+			exit(EXIT_FAILURE);
 		i = 0;
-		while (arg)
+		while ((arg && *arg != '#'))
 		{
 			len = strlen(arg);
 			command[i] = malloc(sizeof(char) * len);
 				if (!command[i])
 				{
 					_free(command);
-					exit(-1);
+					exit(EXIT_FAILURE);
 				}
 			strcpy(command[i], arg);
 			i++;
