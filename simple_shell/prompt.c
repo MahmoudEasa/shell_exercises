@@ -7,12 +7,16 @@
 
 void prompt(char **buf)
 {
-	printf("#cisfun$ ");
+	int is_atty = isatty(STDIN_FILENO);
+
+	if (is_atty)
+		printf("#cisfun$ ");
 	if (fgets(*buf, 1024, stdin) == NULL)
 	{
 		if (feof(stdin))
 		{
-			printf("\n");
+			if (is_atty)
+				printf("\n");
 			free(*buf);
 			exit(EXIT_SUCCESS);
 		}
