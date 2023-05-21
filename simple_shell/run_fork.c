@@ -26,9 +26,9 @@ void run_fork(char **command, char **av, char **env)
 		if (child == 0)
 		{
 			if (strcmp(arg0, "/bin/echo") == 0 && command[1])
-				check_command(command, child);
+				check_echo(command, child);
 			else if (strcmp(arg0, "/bin/echo") == 0)
-				exit(EXIT_SUCCESS);
+				free_exit(command, 1);
 			exe(command, env);
 		}
 		else
@@ -38,33 +38,29 @@ void run_fork(char **command, char **av, char **env)
 				if (strcmp(arg0, "/bin/echo") == 0
 					&& strcmp(command[1], "$$") == 0)
 					printf("%u\n", child);
-			_free(command);
 		}
 	}
 	else
-	{
-		_free(command);
 		perror(av[0]);
-	}
 }
 
 /**
- * check_command - check echo $
+ * check_echo - check echo $
  * @command: array of arguments
  * @child: PID or PPID
  */
 
-void check_command(char **command, pid_t child)
+void check_echo(char **command, pid_t child)
 {
 	int len, i;
 
 	if (strcmp(command[1], "$?") == 0)
 	{
 		printf("%u\n", child);
-		exit(EXIT_SUCCESS);
+		free_exit(command, 1);
 	}
 	else if (strcmp(command[1], "$$") == 0)
-		exit(EXIT_SUCCESS);
+		free_exit(command, 1);
 	else if (command[1][0] == '$')
 	{
 		len = strlen(command[1]);
@@ -72,7 +68,7 @@ void check_command(char **command, pid_t child)
 			command[1][i] = command[1][i + 1];
 
 		printf("%s\n", getenv(command[1]));
-		exit(EXIT_SUCCESS);
+		free_exit(command, 1);
 	}
 }
 
@@ -88,5 +84,21 @@ void handle_command(char **command, char (*arg0)[30])
 		strcat(*arg0, command[0]);
 	else
 		strcpy(*arg0, command[0]);
+}
+
+/**
+ * free_exit - free and exit program
+ * @command: array of string
+ * @is_arr: int 1 is array 0 is string
+ */
+
+void free_exit(char **command, int is_arr)
+{
+	if (is_arr)
+		_free(command);
+	else
+		free((*command));
+
+	exit(EXIT_SUCCESS);
 }
 

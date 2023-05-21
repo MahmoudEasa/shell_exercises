@@ -22,8 +22,9 @@ void run_fork(char **command, char **av, char **env);
 void exit_p(char **command);
 void print_pid();
 void print_ppid();
-void check_command(char **command, pid_t child);
+void check_echo(char **command, pid_t child);
 void handle_command(char **command, char (*arg0)[30]);
+void free_exit(char **command, int is_arr);
 
 #endif /* #ifdef MAIN_H */
 

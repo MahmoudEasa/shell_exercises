@@ -19,9 +19,6 @@ void exit_p(char **command)
 			exit(EXIT_SUCCESS);
 	}
 	else
-	{
-		_free(command);
-		exit(EXIT_SUCCESS);
-	}
+		free_exit(command, 1);
 }
 

@@ -12,9 +12,6 @@ void exe(char **args, char **env)
 
 	handle_command(args, &arg0);
 
-	if (strcmp(arg0, "/bin/echo") == 0 && !args[1])
-		return;
-
 	if (execve(arg0, args, env) == -1)
 		perror(args[0]);
 }

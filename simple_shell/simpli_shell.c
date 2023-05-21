@@ -27,26 +27,26 @@ int main(int ac, char **av, char **env)
 		{
 			free(command);
 			clear();
-			continue;
 		}
-		if (strcmp(command, "env") == 0)
+		else if (strcmp(command, "env") == 0)
 		{
 			free(command);
 			print_env(env);
-			continue;
 		}
-		len = strlen(command);
-		if (*command == '\n')
-		{
+		else if (*command == '\n')
 			free(command);
-			continue;
+		else
+		{
+			len = strlen(command);
+			command[len - 1] = '\0';
+			args = split_str(command);
+			free(command);
+			if (!args)
+				continue;
+			run_fork(args, av, env);
+			_free(args);
 		}
-		command[len - 1] = '\0';
-		args = split_str(command);
-		free(command);
-		if (!args)
-			continue;
-		run_fork(args, av, env);
 	}
 	return (0);
 }
+
