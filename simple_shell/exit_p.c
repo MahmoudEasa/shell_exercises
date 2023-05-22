@@ -13,10 +13,7 @@ void exit_p(char **command)
 	{
 		num = atoi(command[1]);
 		_free(command);
-		if (num != 0)
-			exit(num);
-		else
-			exit(EXIT_SUCCESS);
+		exit(num);
 	}
 	else
 		free_exit(command, 1);

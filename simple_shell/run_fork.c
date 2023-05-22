@@ -10,7 +10,7 @@
 void run_fork(char **command, char **av, char **env)
 {
 	struct stat st;
-	pid_t child;
+	pid_t pid;
 	int status;
 	char arg0[30] = "/bin/";
 
@@ -20,13 +20,13 @@ void run_fork(char **command, char **av, char **env)
 
 	if (stat(arg0, &st) == 0)
 	{
-		child = fork();
-		if (child == -1)
+		pid = fork();
+		if (pid == -1)
 			perror("Error ");
-		if (child == 0)
+		if (pid == 0)
 		{
 			if (strcmp(arg0, "/bin/echo") == 0 && command[1])
-				check_echo(command, child);
+				check_echo(command, pid);
 			else if (strcmp(arg0, "/bin/echo") == 0)
 				free_exit(command, 1);
 			exe(command, env);
@@ -37,7 +37,7 @@ void run_fork(char **command, char **av, char **env)
 			if (command[1])
 				if (strcmp(arg0, "/bin/echo") == 0
 					&& strcmp(command[1], "$$") == 0)
-					printf("%u\n", child);
+					printf("%u\n", getppid());
 		}
 	}
 	else
